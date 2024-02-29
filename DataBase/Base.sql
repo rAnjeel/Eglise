@@ -1,3 +1,5 @@
+--sqlcmd -S DESKTOP-RCL8G7D\SQLEXPRESS -E
+
 CREATE TABLE fiangonana (
     id INT PRIMARY KEY,
     nom NVARCHAR(100)
