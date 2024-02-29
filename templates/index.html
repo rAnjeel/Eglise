@@ -1,13 +1,32 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en" style="padding-top: 0px;">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Fiangonana</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/Overlay-Login-Form.css') }}">
 </head>
-<body>
-    <h1>COUCOU</h1>
+
+<body><section>
+    <div class="section-bg-overlay">
+        <div class="form-box">
+            <div class="form-value">
+                <form action>
+                    <div class="inputbox"><input type="email" required /><label for>Email</label></div>
+                    <div class="inputbox"><input type="password" required /><label for>Password</label></div>
+                    <div class="register">
+                        <p>Pas d'identifiant ? <a href="#">Inscription</a></p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script src="{{ url_for('static', filename='bootstrap/js/bootstrap.min.js') }}} "></script>
 </body>
+
 </html>
