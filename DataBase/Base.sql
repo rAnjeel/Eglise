@@ -1,12 +1,12 @@
 --sqlcmd -S DESKTOP-RCL8G7D\SQLEXPRESS -E
 
 CREATE TABLE fiangonana (
-    id INT PRIMARY KEY,
+    id INT IDENTITY(1,1) PRIMARY KEY,
     nom NVARCHAR(100)
 );
 
 CREATE TABLE caisse (
-    idCaisse INT PRIMARY KEY,
+    idCaisse INT IDENTITY(1,1) PRIMARY KEY,
     idFiangonana INT,
     montant DECIMAL(18, 2),
     dateInsertion DATE,
@@ -14,7 +14,7 @@ CREATE TABLE caisse (
 );
 
 CREATE TABLE mpiangona (
-    IdMpiangona INT PRIMARY KEY,
+    IdMpiangona INT IDENTITY(1,1) PRIMARY KEY,
     idFiangonana INT,
     login NVARCHAR(100),
     mdp NVARCHAR(100),
@@ -23,7 +23,7 @@ CREATE TABLE mpiangona (
 );
 
 CREATE TABLE pret (
-    idPret INT PRIMARY KEY,
+    idPret INT IDENTITY(1,1) PRIMARY KEY,
     idMpino INT,
     idFiangonana INT,
     montant DECIMAL(18, 2),
