@@ -1,3 +1,8 @@
+import pyodbc
+
+from SqlConnection import SqlConnection
+
+
 class Caisse:
     def __init__(self, idcaisse, idFiangonana, montant, date):
         self.idcaisse = idcaisse
@@ -5,47 +10,71 @@ class Caisse:
         self.montant = montant
         self.date = date
 
-    # Fonction pour créer une nouvelle caisse
-    def create(self, idcaisse, idFiangonana, montant, date):
-        self.idcaisse = idcaisse
-        self.idFiangonana = idFiangonana
-        self.montant = montant
-        self.date = date
+    class Caisse:
+        def __init__(self, idcaisse, idFiangonana, montant, date):
+            self.idcaisse = idcaisse
+            self.idFiangonana = idFiangonana
+            self.montant = montant
+            self.date = date
 
-    # Fonction pour lire les détails de la caisse
-    def read(self):
-        return f"ID Caisse: {self.idcaisse}, ID Fiagonana: {self.idFiangonana}, Montant: {self.montant}, Date: {self.date}"
+        @staticmethod
+        def create(idFiangonana, montant, date):
+            try:
+                connection = SqlConnection('DESKTOP-RCL8G7D\SQLEXPRESS', 'Eglise', 'sa', 'rabearison')
+                connection.connect()
+                cursor = connection.connection.cursor()
+                cursor.execute("INSERT INTO Caisse (idFiangonana, montant, date) VALUES (?, ?, ?)",
+                               (idFiangonana, montant, date))
+                connection.connection.commit()
+                print("Nouvelle caisse créée avec succès.")
+            except pyodbc.Error as e:
+                print(f"Erreur lors de la création de la caisse: {e}")
+            finally:
+                connection.close()
 
-    # Fonction pour mettre à jour les détails de la caisse
-    def update(self, idFiangonana, montant, date):
-        self.idFiangonana = idFiangonana
-        self.montant = montant
-        self.date = date
+        @staticmethod
+        def read(idcaisse):
+            try:
+                connection = SqlConnection('DESKTOP-RCL8G7D\SQLEXPRESS', 'Eglise', 'sa', 'rabearison')
+                connection.connect()
+                cursor = connection.connection.cursor()
+                cursor.execute("SELECT * FROM Caisse WHERE idcaisse=?", (idcaisse,))
+                row = cursor.fetchone()
+                if row:
+                    return row
+                else:
+                    print("Caisse non trouvée.")
+            except pyodbc.Error as e:
+                print(f"Erreur lors de la lecture de la caisse: {e}")
+            finally:
+                connection.close()
 
-    # Fonction pour supprimer la caisse
-    def delete(self):
-        self.idcaisse = None
-        self.idFiangonana = None
-        self.montant = None
-        self.date = None
+        @staticmethod
+        def update(idcaisse, idFiangonana, montant, date):
+            try:
+                connection = SqlConnection('DESKTOP-RCL8G7D\SQLEXPRESS', 'Eglise', 'sa', 'rabearison')
+                connection.connect()
+                cursor = connection.connection.cursor()
+                cursor.execute("UPDATE Caisse SET idFiangonana=?, montant=?, date=? WHERE idcaisse=?",
+                               (idFiangonana, montant, date, idcaisse))
+                connection.connection.commit()
+                print("Détails de la caisse mis à jour avec succès.")
+            except pyodbc.Error as e:
+                print(f"Erreur lors de la mise à jour de la caisse: {e}")
+            finally:
+                connection.close()
 
-# Exemple d'utilisation
-caisse = Caisse(1, 101, 500, '2024-02-28')
+        @staticmethod
+        def delete(idcaisse):
+            try:
+                connection = SqlConnection('DESKTOP-RCL8G7D\SQLEXPRESS', 'Eglise', 'sa', 'rabearison')
+                connection.connect()
+                cursor = connection.connection.cursor()
+                cursor.execute("DELETE FROM Caisse WHERE idcaisse=?", (idcaisse,))
+                connection.connection.commit()
+                print("Caisse supprimée avec succès.")
+            except pyodbc.Error as e:
+                print(f"Erreur lors de la suppression de la caisse: {e}")
+            finally:
+                connection.close()
 
-# Création d'une nouvelle caisse
-caisse.create(2, 102, 700, '2024-02-28')
-
-# Lecture des détails de la caisse
-print(caisse.read())
-
-# Mise à jour des détails de la caisse
-caisse.update(103, 800, '2024-02-28')
-
-# Lecture des détails de la caisse mis à jour
-print(caisse.read())
-
-# Suppression de la caisse
-caisse.delete()
-
-# Lecture des détails de la caisse après suppression
-print(caisse.read())  # Cela devrait afficher les attributs comme None car la caisse a été supprimée

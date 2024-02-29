@@ -1,6 +1,6 @@
 class Mpiangona:
     def __init__(self, idMpiangona, idFiangonana, login, mdp, is_pasitera):
-        self.idMpiangona = idMpiangonax
+        self.idMpiangona = idMpiangona
         self.idFiangonana = idFiangonana
         self.login = login
         self.mdp = mdp
