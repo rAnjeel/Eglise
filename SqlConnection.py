@@ -40,7 +40,7 @@ if __name__ == "__main__":
     connection = SqlConnection(server, database, username, password)
     connection.connect()
 
-    query = "SELECT * FROM Caissel"
+    query = "SELECT * FROM Caisse"
     connection.execute_query(query)
 
     connection.close()
