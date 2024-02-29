@@ -100,14 +100,14 @@ class Mpiangona:
 
     # Exemple d'utilisation :
     # Création d'un nouveau Mpiangona
-    Mpiangona.create(1, 'login_test', 'mdp_test', True)
+    # Mpiangona.create(1, 'login_test', 'mdp_test', True)
 
     # Lecture des détails du Mpiangona
-    mpiangona_details = Mpiangona.read(1)
+    mpiangona_details = Mpiangona.read(2)
     print(mpiangona_details)
 
     # Mise à jour des détails du Mpiangona
     Mpiangona.update(1, 2, 'login_test_update', 'mdp_test_update', False)
 
-    # Suppression du Mpiangona
-    Mpiangona.delete(1)
+    # # Suppression du Mpiangona
+    # Mpiangona.delete(1)
