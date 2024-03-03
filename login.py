@@ -9,6 +9,10 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtWidgets import QMessageBox
+
+import Fiangonana
+import Mpiangona
 
 
 class Ui_MainWindow(object):
@@ -88,6 +92,9 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
+        # Connecter le bouton à la fonction de connexion
+        self.pushButton.clicked.connect(self.login_function)
+
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "Fiangonana Manara-penitra"))
@@ -96,7 +103,20 @@ class Ui_MainWindow(object):
         self.pushButton.setText(_translate("MainWindow", "LOG IN"))
         self.label.setText(_translate("MainWindow", "LOGIN"))
         self.label_3.setText(_translate("MainWindow", "LOGIN :"))
-        self.label_4.setText(_translate("MainWindow", "PASS WORD :"))
+        self.label_4.setText(_translate("MainWindow", "PASSWORD :"))
+
+    def login_function(self):
+        # Récupérer les valeurs des champs de texte
+        login = self.lineEdit.text()
+        password = self.lineEdit_2.text()
+
+        # Vérifier les informations de connexion
+        authentificator = Fiangonana.login(login,password)
+        if authentificator == 0:
+            QMessageBox.information(self.frame, "Succès", "Connexion ADMIN réussie !")
+        if authentificator == 1:
+            QMessageBox.information(self.frame, "Succès", "Connexion MPIANGONA réussie !")
+
 
 
 if __name__ == "__main__":
@@ -107,3 +127,4 @@ if __name__ == "__main__":
     ui.setupUi(MainWindow)
     MainWindow.show()
     sys.exit(app.exec_())
+    run_application()

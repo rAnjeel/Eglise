@@ -80,34 +80,16 @@ class Mpiangona:
             finally:
                 connection.close()
 
-        @staticmethod
-        def login(login, mdp, idFiangonana):
-            try:
-                connection = SqlConnection('DESKTOP-RCL8G7D\SQLEXPRESS', 'Eglise', 'sa', 'rabearison')
-                connection.connect()
-                cursor = connection.connection.cursor()
-                cursor.execute("SELECT * FROM Mpiangona WHERE login=? AND mdp=? AND idFiangonana=?",
-                               (login, mdp, idFiangonana))
-                row = cursor.fetchone()
-                if row:
-                    print("Connexion réussie.")
-                else:
-                    print("Identifiants invalides.")
-            except pyodbc.Error as e:
-                print(f"Erreur lors de la tentative de connexion: {e}")
-            finally:
-                connection.close()
-
     # Exemple d'utilisation :
     # Création d'un nouveau Mpiangona
     # Mpiangona.create(1, 'login_test', 'mdp_test', True)
 
     # Lecture des détails du Mpiangona
-    mpiangona_details = Mpiangona.read(2)
-    print(mpiangona_details)
+    # mpiangona_details = Mpiangona.read(2)
+    # print(mpiangona_details)
 
     # Mise à jour des détails du Mpiangona
-    Mpiangona.update(2, 1, 'admin', 'admin', True)
+    # Mpiangona.update(2, 1, 'admin', 'admin', True)
 
     # # Suppression du Mpiangona
     # Mpiangona.delete(1)

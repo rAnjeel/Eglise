@@ -189,8 +189,8 @@ class Fiangonana:
 
 
 # Exemple d'utilisation :
-num = Fiangonana.login('admin','admin')
-print(num)
+# num = Fiangonana.login('admin','admin')
+# print(num)
 
 # Création d'un nouveau Mpiangona
 # liste = Fiangonana.get_liste_caisse(1)

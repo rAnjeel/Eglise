@@ -1,21 +1,17 @@
-from datetime import datetime, timedelta
+def calculer_pourcentage_diminution(somme_dons_2023, somme_dons_2024):
+    # Calcul de la différence absolue
+    difference_absolue = abs(somme_dons_2024 - somme_dons_2023)
 
-def get_sundays_in_2023():
-    sundays = []
-    year = 2023
-    start_date = datetime(year, 1, 1)  # Premier jour de l'année 2023
+    # Calcul du pourcentage de diminution
+    if somme_dons_2023 != 0:
+        pourcentage_diminution = (difference_absolue / somme_dons_2023) * 100
+    else:
+        pourcentage_diminution = 0
 
-    # Trouver le premier dimanche
-    start_date += timedelta(days=(6 - start_date.weekday()))
+    return pourcentage_diminution
 
-    # Parcourir toutes les semaines de l'année
-    while start_date.year == year:
-        sundays.append(start_date)
-        start_date += timedelta(weeks=1)
-
-    return sundays
-
-# Exemple d'utilisation :
-sundays_2023 = get_sundays_in_2023()
-for sunday in sundays_2023:
-    print(sunday.strftime('%Y-%m-%d'))
+# Exemple d'utilisation
+somme_dons_2023 = 122000
+somme_dons_2024 = 15000
+pourcentage = calculer_pourcentage_diminution(somme_dons_2023, somme_dons_2024)
+print(f"Pourcentage de diminution : {pourcentage}%")
