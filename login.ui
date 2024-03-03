@@ -95,9 +95,9 @@
      <property name="geometry">
       <rect>
        <x>260</x>
-       <y>40</y>
-       <width>201</width>
-       <height>51</height>
+       <y>20</y>
+       <width>271</width>
+       <height>81</height>
       </rect>
      </property>
      <property name="font">
@@ -184,8 +184,6 @@
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
- <resources>
-  <include location="assets/img/img.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

@@ -68,8 +68,6 @@ class Ui_MainWindow(object):
         item.setText(_translate("MainWindow", "Date of Birth"))
         item = self.tableWidget.horizontalHeaderItem(5)
         item.setText(_translate("MainWindow", "Weigth"))
-import test_rc
-
 
 if __name__ == "__main__":
     import sys

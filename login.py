@@ -47,7 +47,7 @@ class Ui_MainWindow(object):
         self.pushButton.setIcon(icon1)
         self.pushButton.setObjectName("pushButton")
         self.label = QtWidgets.QLabel(self.frame)
-        self.label.setGeometry(QtCore.QRect(260, 40, 201, 51))
+        self.label.setGeometry(QtCore.QRect(260, 20, 271, 81))
         font = QtGui.QFont()
         font.setPointSize(46)
         font.setBold(True)
@@ -91,6 +91,8 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "Fiangonana Manara-penitra"))
+        self.lineEdit_2.setPlaceholderText(_translate("MainWindow", "MyPassWord"))
+        self.lineEdit.setPlaceholderText(_translate("MainWindow", "Ex: MyEmail@gmail.com"))
         self.pushButton.setText(_translate("MainWindow", "LOG IN"))
         self.label.setText(_translate("MainWindow", "LOGIN"))
         self.label_3.setText(_translate("MainWindow", "LOGIN :"))
