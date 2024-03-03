@@ -7,45 +7,114 @@
     <x>0</x>
     <y>0</y>
     <width>700</width>
-    <height>500</height>
+    <height>505</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QTextEdit" name="textEdit">
+   <widget class="QFrame" name="frame">
     <property name="geometry">
      <rect>
-      <x>150</x>
-      <y>100</y>
-      <width>431</width>
-      <height>71</height>
+      <x>10</x>
+      <y>10</y>
+      <width>681</width>
+      <height>441</height>
      </rect>
     </property>
-   </widget>
-   <widget class="QTextEdit" name="textEdit_2">
-    <property name="geometry">
-     <rect>
-      <x>150</x>
-      <y>190</y>
-      <width>431</width>
-      <height>71</height>
-     </rect>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
     </property>
-   </widget>
-   <widget class="QPushButton" name="pushButton">
-    <property name="geometry">
-     <rect>
-      <x>150</x>
-      <y>282</y>
-      <width>431</width>
-      <height>41</height>
-     </rect>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
     </property>
-    <property name="text">
-     <string>LOG IN</string>
-    </property>
+    <widget class="QLineEdit" name="lineEdit_2">
+     <property name="geometry">
+      <rect>
+       <x>50</x>
+       <y>250</y>
+       <width>581</width>
+       <height>71</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>20</pointsize>
+      </font>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit">
+     <property name="geometry">
+      <rect>
+       <x>50</x>
+       <y>160</y>
+       <width>581</width>
+       <height>71</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>20</pointsize>
+      </font>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton">
+     <property name="geometry">
+      <rect>
+       <x>50</x>
+       <y>350</y>
+       <width>581</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>LOG IN</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>assets/img/black-login-icon--0.png</normaloff>assets/img/black-login-icon--0.png</iconset>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label">
+     <property name="geometry">
+      <rect>
+       <x>260</x>
+       <y>40</y>
+       <width>201</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>46</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>LOGIN</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_2">
+     <property name="geometry">
+      <rect>
+       <x>150</x>
+       <y>20</y>
+       <width>111</width>
+       <height>81</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="pixmap">
+      <pixmap>assets/img/free-user-login-icon-305-thumb.png</pixmap>
+     </property>
+     <property name="scaledContents">
+      <bool>true</bool>
+     </property>
+    </widget>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -57,21 +126,11 @@
      <height>21</height>
     </rect>
    </property>
-   <widget class="QMenu" name="menuabout">
-    <property name="title">
-     <string>about</string>
-    </property>
-   </widget>
-   <widget class="QMenu" name="menugaga">
-    <property name="title">
-     <string>gaga</string>
-    </property>
-   </widget>
-   <addaction name="menuabout"/>
-   <addaction name="menugaga"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
- <resources/>
+ <resources>
+  <include location="assets/img/img.qrc"/>
+ </resources>
  <connections/>
 </ui>
