@@ -107,7 +107,9 @@ class Mpiangona:
     print(mpiangona_details)
 
     # Mise à jour des détails du Mpiangona
-    Mpiangona.update(1, 2, 'login_test_update', 'mdp_test_update', False)
+    Mpiangona.update(2, 1, 'admin', 'admin', True)
 
     # # Suppression du Mpiangona
     # Mpiangona.delete(1)
+
+

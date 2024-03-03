@@ -27,6 +27,32 @@ class Fiangonana:
             connection.close()
 
     @staticmethod
+    def login(login_input, mdp_input):
+        try:
+            # Instanciation de la classe SqlConnection
+            connection = SqlConnection('DESKTOP-RCL8G7D\SQLEXPRESS', 'Eglise', 'sa', 'rabearison')
+            connection.connect()  # Connexion à la base de données
+            cursor = connection.connection.cursor()
+
+            # Requête pour vérifier le login et le mot de passe
+            query = "SELECT is_pasitera FROM Mpiangona WHERE login = ? AND mdp = ?"
+            cursor.execute(query, (login_input, mdp_input))
+            result = cursor.fetchone()
+
+            if result is None:
+                raise Exception("Login ou mot de passe incorrect.")
+
+            # Retourner 0 si is_pasitera est True, sinon 1
+            return 0 if result[0] else 1
+
+        except Exception as e:
+            print(f"Erreur lors de la connexion : {e}")
+            return -1
+        finally:
+            if connection:
+                connection.close()  # Fermeture de la connexion à la base de données
+
+    @staticmethod
     def get_liste_croyants(idFiangonana):
         try:
             connection = SqlConnection('DESKTOP-RCL8G7D\SQLEXPRESS', 'Eglise', 'sa', 'rabearison')
@@ -163,8 +189,8 @@ class Fiangonana:
 
 
 # Exemple d'utilisation :
-dimanche = Fiangonana.get_numero_dimanche_caisse('2023-10-15')
-print(dimanche[0],dimanche[1])
+num = Fiangonana.login('admin','admin')
+print(num)
 
 # Création d'un nouveau Mpiangona
 # liste = Fiangonana.get_liste_caisse(1)
