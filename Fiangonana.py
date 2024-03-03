@@ -1,3 +1,5 @@
+import datetime
+
 import pyodbc
 
 from Caisse import Caisse
@@ -187,16 +189,83 @@ class Fiangonana:
         finally:
             connection.close()
 
+    def get_dimanches_suivant(date_to_check):
+        try:
+            connection = SqlConnection('DESKTOP-RCL8G7D\SQLEXPRESS', 'Eglise', 'sa', 'rabearison')
+            connection.connect()
+            cursor = connection.connection.cursor()
+
+            cursor.execute("""
+                SELECT 
+                    Date 
+                FROM 
+                    Vue_Caisse
+                WHERE 
+                    Date > ?
+                ORDER BY Date
+            """, (date_to_check,))
+
+            results = cursor.fetchall()
+
+            if results:
+                return results
+            else:
+                return None
+
+        except pyodbc.Error as e:
+            print(f"Erreur lors de la récupération des dates des dimanches après la date spécifiée : {e}")
+        finally:
+            connection.close()
+
+    @staticmethod
+    def get_numero_dimanche_caisse(date_to_check):
+        try:
+            connection = SqlConnection('DESKTOP-RCL8G7D\SQLEXPRESS', 'Eglise', 'sa', 'rabearison')
+            connection.connect()
+            cursor = connection.connection.cursor()
+
+            cursor.execute("""
+                DECLARE @DateToCheck DATE = ?;
+                SELECT 
+                    Numero_Dimanche_Annee, Numero_Dimanche_Mois
+                FROM 
+                    Vue_Caisse
+                WHERE 
+                    Date = (
+                        SELECT 
+                            DATEADD(day, -DATEPART(WEEKDAY, @DateToCheck), @DateToCheck) AS PreviousYearSunday
+                    );
+            """, (date_to_check,))
+
+            result = cursor.fetchone()
+
+            if result:
+                return result
+            else:
+                return None
+
+        except pyodbc.Error as e:
+            print(f"Erreur lors de la vérification de la date dans la vue_caisse : {e}")
+        finally:
+            if connection:
+                connection.close()
+
+    def get_date_obtention_pret(date_to_check):
+        sommeActuel = Fiangonana.get_sum_montants(date_to_check)
+
+
 
 # Exemple d'utilisation :
 # num = Fiangonana.login('admin','admin')
 # print(num)
 
-# Création d'un nouveau Mpiangona
-# liste = Fiangonana.get_liste_caisse(1)
+# # Création d'un nouveau Mpiangona
+# liste = Fiangonana.get_dimanches_suivant('2023-07-30')
 # for caisse in liste:
-#     print(caisse.idcaisse, caisse.idFiangonana, caisse.montant, caisse.date)
-#     sum = Fiangonana.get_sum_montants(caisse.date)
-#     print(sum)
+#     print(caisse[0])
+#     print(Fiangonana.get_numero_dimanche_caisse(caisse[0])[0])
 
-
+# Test de la fonction
+date_to_check = '2023-08-06'
+date_dimanche_annee_precedente = Fiangonana.get_numero_dimanche_caisse(date_to_check)
+print(date_dimanche_annee_precedente)
