@@ -1,6 +1,7 @@
 import pyodbc
 
 from Caisse import Caisse
+from Pret import Pret
 from SqlConnection import SqlConnection
 
 class Fiangonana:
@@ -87,6 +88,23 @@ class Fiangonana:
             return caisses
         except pyodbc.Error as e:
             print(f"Erreur lors de la récupération de la liste des caisses : {e}")
+        finally:
+            connection.close()
+
+    @staticmethod
+    def get_liste_prets(idFiangonana):
+        try:
+            connection = SqlConnection('DESKTOP-RCL8G7D\SQLEXPRESS', 'Eglise', 'sa', 'rabearison')
+            connection.connect()
+            cursor = connection.connection.cursor()
+            cursor.execute("SELECT * FROM Pret WHERE idFiangonana=?", (idFiangonana,))
+            rows = cursor.fetchall()
+            prets = []
+            for row in rows:
+                prets.append(Pret(*row))
+            return prets
+        except pyodbc.Error as e:
+            print(f"Erreur lors de la récupération de la liste des prêts : {e}")
         finally:
             connection.close()
 
