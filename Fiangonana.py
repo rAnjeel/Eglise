@@ -75,6 +75,7 @@ class Fiangonana:
             if conn:
                 conn.close()
 
+    @staticmethod
     def get_liste_caisse(idFiangonana):
         try:
             connection = SqlConnection('DESKTOP-RCL8G7D\SQLEXPRESS', 'Eglise', 'sa', 'rabearison')
@@ -108,8 +109,68 @@ class Fiangonana:
         finally:
             connection.close()
 
+    def get_sum_montants(date_inserer):
+        try:
+            connection = SqlConnection('DESKTOP-RCL8G7D\SQLEXPRESS', 'Eglise', 'sa', 'rabearison')
+            connection.connect()
+            cursor = connection.connection.cursor()
+
+            cursor.execute("""
+                SELECT 
+                    SUM(Montant) AS Somme_Montants
+                FROM 
+                    Vue_Caisse
+                WHERE 
+                    Annee = YEAR(?)
+                    AND Numero_Dimanche_Annee >= DATEPART(WEEK, CAST(CONCAT(YEAR(?), '-01-01') AS DATE)) 
+                    AND Numero_Dimanche_Annee < DATEPART(WEEK, ?);
+            """, (date_inserer, date_inserer, date_inserer))
+
+            somme_montants = cursor.fetchone()[0]
+            return somme_montants
+        except pyodbc.Error as e:
+            print(f"Erreur lors de la récupération de la somme des montants : {e}")
+        finally:
+            connection.close()
+
+    @staticmethod
+    def get_numero_dimanche_caisse(date_to_check):
+        try:
+            connection = SqlConnection('DESKTOP-RCL8G7D\SQLEXPRESS', 'Eglise', 'sa', 'rabearison')
+            connection.connect()
+            cursor = connection.connection.cursor()
+
+            cursor.execute("""
+                SELECT 
+                    Numero_Dimanche_Annee, Numero_Dimanche_Mois
+                FROM 
+                    Vue_Caisse
+                WHERE 
+                    Date = ?
+            """, (date_to_check,))
+
+            result = cursor.fetchone()
+
+            if result:
+                return result
+            else:
+                return None
+
+        except pyodbc.Error as e:
+            print(f"Erreur lors de la vérification de la date dans la vue_caisse : {e}")
+        finally:
+            connection.close()
+
+
 # Exemple d'utilisation :
+dimanche = Fiangonana.get_numero_dimanche_caisse('2023-10-15')
+print(dimanche[0],dimanche[1])
+
 # Création d'un nouveau Mpiangona
-liste = Fiangonana.get_liste_caisse(1)
-for caisse in liste:
-    print(caisse.idcaisse, caisse.idFiangonana, caisse.montant, caisse.date)
+# liste = Fiangonana.get_liste_caisse(1)
+# for caisse in liste:
+#     print(caisse.idcaisse, caisse.idFiangonana, caisse.montant, caisse.date)
+#     sum = Fiangonana.get_sum_montants(caisse.date)
+#     print(sum)
+
+

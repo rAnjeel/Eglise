@@ -70,16 +70,16 @@ class Pret:
         finally:
             connection.close()
 
-# Exemple d'utilisation :
-# Création d'un nouveau prêt
-Pret.create(1, 1, 500, '2024-02-29')
-
-# Lecture des détails du prêt
-pret_details = Pret.read(1)
-print(pret_details)
-
-# Mise à jour des détails du prêt
-Pret.update(1, 2, 2, 700, '2024-03-01')
-
-# Suppression du prêt
-Pret.delete(1)
+# # Exemple d'utilisation :
+# # Création d'un nouveau prêt
+# Pret.create(1, 1, 500, '2024-02-29')
+#
+# # Lecture des détails du prêt
+# pret_details = Pret.read(1)
+# print(pret_details)
+#
+# # Mise à jour des détails du prêt
+# Pret.update(1, 2, 2, 700, '2024-03-01')
+#
+# # Suppression du prêt
+# Pret.delete(1)
