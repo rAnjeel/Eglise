@@ -1,6 +1,0 @@
-<RCC>
-  <qresource prefix="newPrefix">
-    <file>black-login-icon--0.png</file>
-    <file>free-user-login-icon-305-thumb.png</file>
-  </qresource>
-</RCC>

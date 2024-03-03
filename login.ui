@@ -11,7 +11,11 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Fiangonana Manara-penitra</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>assets/img/Autoc phale_logo.webp</normaloff>assets/img/Autoc phale_logo.webp</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QFrame" name="frame">
@@ -23,6 +27,11 @@
       <height>441</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <pointsize>11</pointsize>
+     </font>
+    </property>
     <property name="frameShape">
      <enum>QFrame::StyledPanel</enum>
     </property>
@@ -32,9 +41,9 @@
     <widget class="QLineEdit" name="lineEdit_2">
      <property name="geometry">
       <rect>
-       <x>50</x>
+       <x>120</x>
        <y>250</y>
-       <width>581</width>
+       <width>511</width>
        <height>71</height>
       </rect>
      </property>
@@ -42,14 +51,17 @@
       <font>
        <pointsize>20</pointsize>
       </font>
+     </property>
+     <property name="placeholderText">
+      <string>MyPassWord</string>
      </property>
     </widget>
     <widget class="QLineEdit" name="lineEdit">
      <property name="geometry">
       <rect>
-       <x>50</x>
+       <x>120</x>
        <y>160</y>
-       <width>581</width>
+       <width>511</width>
        <height>71</height>
       </rect>
      </property>
@@ -58,13 +70,16 @@
        <pointsize>20</pointsize>
       </font>
      </property>
+     <property name="placeholderText">
+      <string>Ex: MyEmail@gmail.com</string>
+     </property>
     </widget>
     <widget class="QPushButton" name="pushButton">
      <property name="geometry">
       <rect>
-       <x>50</x>
+       <x>120</x>
        <y>350</y>
-       <width>581</width>
+       <width>511</width>
        <height>51</height>
       </rect>
      </property>
@@ -113,6 +128,46 @@
      </property>
      <property name="scaledContents">
       <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_3">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>170</y>
+       <width>71</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>11</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>LOGIN :</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_4">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>260</y>
+       <width>111</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>11</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>PASS WORD :</string>
      </property>
     </widget>
    </widget>
