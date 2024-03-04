@@ -1,11 +1,12 @@
 import pyodbc
 
 class SqlConnection:
-    def __init__(self, server, database, username, password):
-        self.server = server
-        self.database = database
-        self.username = username
-        self.password = password
+    def __init__(self):
+        self.server = 'DESKTOP-RCL8G7D\SQLEXPRESS'
+        # self.server = '192.10.147.20'
+        self.database = 'Eglise'
+        self.username = 'sa'
+        self.password = 'rabearison'
         self.connection = None
 
     def connect(self):

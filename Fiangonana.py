@@ -17,7 +17,7 @@ class Fiangonana:
     @staticmethod
     def insert(nom):
         try:
-            connection = SqlConnection('DESKTOP-RCL8G7D\SQLEXPRESS', 'Eglise', 'sa', 'rabearison')
+            connection = SqlConnection()
             connection.connect()
             cursor = connection.connection.cursor()
             cursor.execute("INSERT INTO Fiangonana (nom) VALUES (?)", (nom))
@@ -32,7 +32,7 @@ class Fiangonana:
     def login(login_input, mdp_input):
         try:
             # Instanciation de la classe SqlConnection
-            connection = SqlConnection('DESKTOP-RCL8G7D\SQLEXPRESS', 'Eglise', 'sa', 'rabearison')
+            connection = SqlConnection()
             connection.connect()  # Connexion à la base de données
             cursor = connection.connection.cursor()
 
@@ -57,7 +57,7 @@ class Fiangonana:
     @staticmethod
     def get_liste_croyants(idFiangonana):
         try:
-            connection = SqlConnection('DESKTOP-RCL8G7D\SQLEXPRESS', 'Eglise', 'sa', 'rabearison')
+            connection = SqlConnection()
             connection.connect()
             cursor = connection.connection.cursor()
             cursor.execute("SELECT * FROM Mpiangona WHERE idFiangonana=?", (idFiangonana,))
@@ -74,7 +74,7 @@ class Fiangonana:
     @staticmethod
     def create_view_caisse(year1, year2):
         try:
-            conn = SqlConnection('DESKTOP-RCL8G7D\SQLEXPRESS', 'Eglise', 'sa', 'rabearison')
+            conn = SqlConnection()
             conn.connect()
             cursor = conn.connection.cursor()
 
@@ -106,7 +106,7 @@ class Fiangonana:
     @staticmethod
     def get_liste_caisse(idFiangonana):
         try:
-            connection = SqlConnection('DESKTOP-RCL8G7D\SQLEXPRESS', 'Eglise', 'sa', 'rabearison')
+            connection = SqlConnection()
             connection.connect()
             cursor = connection.connection.cursor()
             cursor.execute("SELECT * FROM caisse WHERE idFiangonana=?", (idFiangonana,))
@@ -123,7 +123,7 @@ class Fiangonana:
     @staticmethod
     def get_liste_prets(idFiangonana):
         try:
-            connection = SqlConnection('DESKTOP-RCL8G7D\SQLEXPRESS', 'Eglise', 'sa', 'rabearison')
+            connection = SqlConnection()
             connection.connect()
             cursor = connection.connection.cursor()
             cursor.execute("SELECT * FROM Pret WHERE idFiangonana=?", (idFiangonana,))
@@ -139,7 +139,7 @@ class Fiangonana:
 
     def get_sum_montants(date_inserer):
         try:
-            connection = SqlConnection('DESKTOP-RCL8G7D\SQLEXPRESS', 'Eglise', 'sa', 'rabearison')
+            connection = SqlConnection()
             connection.connect()
             cursor = connection.connection.cursor()
 
@@ -164,7 +164,7 @@ class Fiangonana:
     @staticmethod
     def get_numero_dimanche_caisse(date_to_check):
         try:
-            connection = SqlConnection('DESKTOP-RCL8G7D\SQLEXPRESS', 'Eglise', 'sa', 'rabearison')
+            connection = SqlConnection()
             connection.connect()
             cursor = connection.connection.cursor()
 
@@ -191,7 +191,7 @@ class Fiangonana:
 
     def get_dimanches_suivant(date_to_check):
         try:
-            connection = SqlConnection('DESKTOP-RCL8G7D\SQLEXPRESS', 'Eglise', 'sa', 'rabearison')
+            connection = SqlConnection()
             connection.connect()
             cursor = connection.connection.cursor()
 
@@ -220,7 +220,7 @@ class Fiangonana:
     @staticmethod
     def get_numero_dimanche_caisse(date_to_check):
         try:
-            connection = SqlConnection('DESKTOP-RCL8G7D\SQLEXPRESS', 'Eglise', 'sa', 'rabearison')
+            connection = SqlConnection()
             connection.connect()
             cursor = connection.connection.cursor()
 

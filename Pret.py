@@ -14,7 +14,7 @@ class Pret:
     @staticmethod
     def create(idMpino, idFiangonana, montant, date):
         try:
-            connection = SqlConnection('DESKTOP-RCL8G7D\SQLEXPRESS', 'Eglise', 'sa', 'rabearison')
+            connection = SqlConnection()
             connection.connect()
             cursor = connection.connection.cursor()
             cursor.execute("INSERT INTO Pret (idMpino, idFiangonana, montant, date) VALUES (?, ?, ?, ?)", (idMpino, idFiangonana, montant, date))
@@ -28,7 +28,7 @@ class Pret:
     @staticmethod
     def read(idPret):
         try:
-            connection = SqlConnection('DESKTOP-RCL8G7D\SQLEXPRESS', 'Eglise', 'sa', 'rabearison')
+            connection = SqlConnection()
             connection.connect()
             cursor = connection.connection.cursor()
             cursor.execute("SELECT * FROM Pret WHERE idPret=?", (idPret,))
@@ -45,7 +45,7 @@ class Pret:
     @staticmethod
     def update(idPret, idMpino, idFiangonana, montant, date):
         try:
-            connection = SqlConnection('DESKTOP-RCL8G7D\SQLEXPRESS', 'Eglise', 'sa', 'rabearison')
+            connection = SqlConnection()
             connection.connect()
             cursor = connection.connection.cursor()
             cursor.execute("UPDATE Pret SET idMpino=?, idFiangonana=?, montant=?, date=? WHERE idPret=?", (idMpino, idFiangonana, montant, date, idPret))
@@ -59,7 +59,7 @@ class Pret:
     @staticmethod
     def delete(idPret):
         try:
-            connection = SqlConnection('DESKTOP-RCL8G7D\SQLEXPRESS', 'Eglise', 'sa', 'rabearison')
+            connection = SqlConnection()
             connection.connect()
             cursor = connection.connection.cursor()
             cursor.execute("DELETE FROM Pret WHERE idPret=?", (idPret,))

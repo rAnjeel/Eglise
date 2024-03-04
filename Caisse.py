@@ -20,7 +20,7 @@ class Caisse:
         @staticmethod
         def create(idFiangonana, montant, date):
             try:
-                connection = SqlConnection('DESKTOP-RCL8G7D\SQLEXPRESS', 'Eglise', 'sa', 'rabearison')
+                connection = SqlConnection()
                 connection.connect()
                 cursor = connection.connection.cursor()
                 cursor.execute("INSERT INTO Caisse (idFiangonana, montant, date) VALUES (?, ?, ?)",
@@ -35,7 +35,7 @@ class Caisse:
         @staticmethod
         def read(idcaisse):
             try:
-                connection = SqlConnection('DESKTOP-RCL8G7D\SQLEXPRESS', 'Eglise', 'sa', 'rabearison')
+                connection = SqlConnection()
                 connection.connect()
                 cursor = connection.connection.cursor()
                 cursor.execute("SELECT * FROM Caisse WHERE idcaisse=?", (idcaisse,))
@@ -52,7 +52,7 @@ class Caisse:
         @staticmethod
         def update(idcaisse, idFiangonana, montant, date):
             try:
-                connection = SqlConnection('DESKTOP-RCL8G7D\SQLEXPRESS', 'Eglise', 'sa', 'rabearison')
+                connection = SqlConnection()
                 connection.connect()
                 cursor = connection.connection.cursor()
                 cursor.execute("UPDATE Caisse SET idFiangonana=?, montant=?, date=? WHERE idcaisse=?",
@@ -67,7 +67,7 @@ class Caisse:
         @staticmethod
         def delete(idcaisse):
             try:
-                connection = SqlConnection('DESKTOP-RCL8G7D\SQLEXPRESS', 'Eglise', 'sa', 'rabearison')
+                connection = SqlConnection()
                 connection.connect()
                 cursor = connection.connection.cursor()
                 cursor.execute("DELETE FROM Caisse WHERE idcaisse=?", (idcaisse,))

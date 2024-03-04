@@ -22,7 +22,7 @@ class Mpiangona:
         @staticmethod
         def create(idFiangonana, login, mdp, is_pasitera):
             try:
-                connection = SqlConnection('DESKTOP-RCL8G7D\SQLEXPRESS', 'Eglise', 'sa', 'rabearison')
+                connection = SqlConnection()
                 connection.connect()
                 cursor = connection.connection.cursor()
                 cursor.execute("INSERT INTO Mpiangona (idFiangonana, login, mdp, is_pasitera) VALUES (?, ?, ?, ?)",
@@ -37,7 +37,7 @@ class Mpiangona:
         @staticmethod
         def read(idMpiangona):
             try:
-                connection = SqlConnection('DESKTOP-RCL8G7D\SQLEXPRESS', 'Eglise', 'sa', 'rabearison')
+                connection = SqlConnection()
                 connection.connect()
                 cursor = connection.connection.cursor()
                 cursor.execute("SELECT * FROM Mpiangona WHERE idMpiangona=?", (idMpiangona,))
@@ -54,7 +54,7 @@ class Mpiangona:
         @staticmethod
         def update(idMpiangona, idFiangonana, login, mdp, is_pasitera):
             try:
-                connection = SqlConnection('DESKTOP-RCL8G7D\SQLEXPRESS', 'Eglise', 'sa', 'rabearison')
+                connection = SqlConnection()
                 connection.connect()
                 cursor = connection.connection.cursor()
                 cursor.execute("UPDATE Mpiangona SET idFiangonana=?, login=?, mdp=?, is_pasitera=? WHERE idMpiangona=?",
@@ -69,7 +69,7 @@ class Mpiangona:
         @staticmethod
         def delete(idMpiangona):
             try:
-                connection = SqlConnection('DESKTOP-RCL8G7D\SQLEXPRESS', 'Eglise', 'sa', 'rabearison')
+                connection = SqlConnection()
                 connection.connect()
                 cursor = connection.connection.cursor()
                 cursor.execute("DELETE FROM Mpiangona WHERE idMpiangona=?", (idMpiangona,))
