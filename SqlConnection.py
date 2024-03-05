@@ -2,8 +2,10 @@ import pyodbc
 
 class SqlConnection:
     def __init__(self):
-        self.server = 'DESKTOP-RCL8G7D\SQLEXPRESS'
-        # self.server = '192.10.147.20'
+        #self.server = 'DESKTOP-RCL8G7D\SQLEXPRESS'
+        #self.server = '172.20.10.11'
+        self.server = '172.10.194.147'
+        self.server = '192.168.43.152'
         self.database = 'Eglise'
         self.username = 'sa'
         self.password = 'rabearison'
@@ -33,12 +35,8 @@ class SqlConnection:
 
 # Exemple d'utilisation
 if __name__ == "__main__":
-    server = 'DESKTOP-RCL8G7D\SQLEXPRESS'  # ou le nom de votre serveur SQL Server
-    database = 'Eglise'  # Nom de votre base de données
-    username = 'sa'  # Nom d'utilisateur SQL Server
-    password = 'rabearison'  # Mot de passe SQL Server
 
-    connection = SqlConnection(server, database, username, password)
+    connection = SqlConnection()
     connection.connect()
 
     query = "SELECT * FROM Caisse"

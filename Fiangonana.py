@@ -45,7 +45,12 @@ class Fiangonana:
                 raise Exception("Login ou mot de passe incorrect.")
 
             # Retourner 0 si is_pasitera est True, sinon 1
-            return 0 if result[0] else 1
+            if result[0] == True :
+                print("PASITERA")
+                return 0
+            else :
+                print("MPINO")
+                return 1
 
         except Exception as e:
             print(f"Erreur lors de la connexion : {e}")
@@ -53,6 +58,14 @@ class Fiangonana:
         finally:
             if connection:
                 connection.close()  # Fermeture de la connexion à la base de données
+
+    def log(self, username ,password):
+        print("username : ->", username, "password : ->", password)
+        if username == "admin" and password == "admin":
+            print ("OKE TAFIDITRA")
+        else:
+            print ("Tsy tafiditra")
+
 
     @staticmethod
     def get_liste_croyants(idFiangonana):
