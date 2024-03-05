@@ -32,6 +32,17 @@ CREATE TABLE pret (
     FOREIGN KEY (idFiangonana) REFERENCES fiangonana(id)
 );
 
+CREATE TABLE demande (
+    idDemande INT IDENTITY(1,1) PRIMARY KEY,
+    idMpino INT,
+    idFiangonana INT,
+    montant DECIMAL(18, 2),
+    dateDemande DATE,
+    FOREIGN KEY (idMpino) REFERENCES mpiangona(IdMpiangona),
+    FOREIGN KEY (idFiangonana) REFERENCES fiangonana(id)
+);
+
+
 --EXEMPLES DONNEES
 INSERT INTO caisse (idFiangonana, montant, dateInsertion) VALUES
 (1, 50000.00, '2023-01-01'),

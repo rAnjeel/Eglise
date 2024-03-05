@@ -3,7 +3,7 @@ import pyodbc
 from SqlConnection import SqlConnection
 
 
-class Pret:
+class Demande:
     def __init__(self, idMpino, idFiangonana, montant, date):
         self.idFiangonana = idFiangonana
         self.idMpino = idMpino
@@ -16,69 +16,55 @@ class Pret:
             connection = SqlConnection()
             connection.connect()
             cursor = connection.connection.cursor()
-            cursor.execute("INSERT INTO Pret (idMpino, idFiangonana, montant, dateObtention) VALUES (?, ?, ?, ?)", (idMpino, idFiangonana, montant, date))
+            cursor.execute("INSERT INTO Demande (idMpino, idFiangonana, montant, dateDemande) VALUES (?, ?, ?, ?)", (idMpino, idFiangonana, montant, date))
             connection.connection.commit()
-            print("Nouveau prêt ajouté avec succès.")
+            print("Nouveau demande ajouté avec succès.")
         except pyodbc.Error as e:
-            print(f"Erreur lors de l'ajout du prêt: {e}")
+            print(f"Erreur lors de l'ajout du demande: {e}")
         finally:
             connection.close()
 
     @staticmethod
-    def read(idPret):
+    def read(idDemande):
         try:
             connection = SqlConnection()
             connection.connect()
             cursor = connection.connection.cursor()
-            cursor.execute("SELECT * FROM Pret WHERE idPret=?", (idPret,))
+            cursor.execute("SELECT * FROM Demande WHERE idDemande=?", (idDemande,))
             row = cursor.fetchone()
             if row:
                 return row
             else:
-                print("Prêt non trouvé.")
+                print("Demande non trouvé.")
         except pyodbc.Error as e:
-            print(f"Erreur lors de la lecture du prêt: {e}")
+            print(f"Erreur lors de la lecture du Demande: {e}")
         finally:
             connection.close()
 
     @staticmethod
-    def update(idPret, idMpino, idFiangonana, montant, date):
+    def update(idDemande, idMpino, idFiangonana, montant, date):
         try:
             connection = SqlConnection()
             connection.connect()
             cursor = connection.connection.cursor()
-            cursor.execute("UPDATE Pret SET idMpino=?, idFiangonana=?, montant=?, dateObtention=? WHERE idPret=?", (idMpino, idFiangonana, montant, date, idPret))
+            cursor.execute("UPDATE Demande SET idMpino=?, idFiangonana=?, montant=?, date=? WHERE idDemande=?", (idMpino, idFiangonana, montant, date, idDemande))
             connection.connection.commit()
-            print("Détails du prêt mis à jour avec succès.")
+            print("Détails du Demande mis à jour avec succès.")
         except pyodbc.Error as e:
-            print(f"Erreur lors de la mise à jour du prêt: {e}")
+            print(f"Erreur lors de la mise à jour du Demande: {e}")
         finally:
             connection.close()
 
     @staticmethod
-    def delete(idPret):
+    def delete(idDemande):
         try:
             connection = SqlConnection()
             connection.connect()
             cursor = connection.connection.cursor()
-            cursor.execute("DELETE FROM Pret WHERE idPret=?", (idPret,))
+            cursor.execute("DELETE FROM Demande WHERE idDemande=?", (idDemande,))
             connection.connection.commit()
-            print("Prêt supprimé avec succès.")
+            print("Demande supprimé avec succès.")
         except pyodbc.Error as e:
-            print(f"Erreur lors de la suppression du prêt: {e}")
+            print(f"Erreur lors de la suppression du demande: {e}")
         finally:
             connection.close()
-
-# # Exemple d'utilisation :
-# # Création d'un nouveau prêt
-# Pret.create(1, 1, 500, '2024-02-29')
-#
-# # Lecture des détails du prêt
-# pret_details = Pret.read(1)
-# print(pret_details)
-#
-# # Mise à jour des détails du prêt
-# Pret.update(1, 2, 2, 700, '2024-03-01')
-#
-# # Suppression du prêt
-# Pret.delete(1)

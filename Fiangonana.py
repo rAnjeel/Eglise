@@ -2,6 +2,7 @@ import datetime
 
 import pyodbc
 
+import Utilitaire
 from Caisse import Caisse
 from Pret import Pret
 from SqlConnection import SqlConnection
@@ -253,9 +254,36 @@ class Fiangonana:
                 return None
 
         except pyodbc.Error as e:
+            print(f"Erreur lors de la récupération des dates des dimanches avant la date spécifiée : {e}")
+        finally:
+            connection.close()
+
+    @staticmethod
+    def get_dimanche_suivant(date_to_check):
+        try:
+            connection = SqlConnection()
+            connection.connect()
+            cursor = connection.connection.cursor()
+
+            cursor.execute("""
+                SELECT TOP 1 Date
+                FROM Vue_Caisse
+                WHERE Date > ?
+                ORDER BY Date DESC;
+            """, (date_to_check,))
+
+            results = cursor.fetchall()
+
+            if results:
+                return results
+            else:
+                return None
+
+        except pyodbc.Error as e:
             print(f"Erreur lors de la récupération des dates des dimanches après la date spécifiée : {e}")
         finally:
             connection.close()
+
 
 
     @staticmethod
@@ -334,14 +362,60 @@ class Fiangonana:
 
         return date_annee_precedente_str
 
-    def get_date_obtention_pret(date_to_check):
-        dateRakitraAnneeActuel = Fiangonana.check_date_exists(date_to_check)  #date du dernier rakitra de l'annee actuel
-        dateRakitraAnneeAvant = Fiangonana.check_date_exists(Fiangonana.date_annee_precedente(date_to_check))
+    def solde_actuel(self):
+        try:
+            connection = SqlConnection()
+            connection.connect()
+
+            cursor = connection.connection.cursor()
+
+            # Calculer la somme des montants dans la table "caisse"
+            cursor.execute("SELECT SUM(montant) FROM caisse")
+            montant_caisse = cursor.fetchone()[0]
+
+            # Calculer la somme des montants dans la table "pret"
+            cursor.execute("SELECT SUM(montant) FROM pret")
+            montant_pret = cursor.fetchone()[0]
+
+            # Calculer la différence
+            difference = montant_caisse - montant_pret
+            print(f"Différence entre la somme des montants dans caisse et dans pret : {difference}")
+
+        except pyodbc.Error as e:
+            print(f"Erreur lors du calcul de la différence : {e}")
+
+        finally:
+            connection.close()
+
+    def ajouterPret(self, idMpiangona, idFiangonana, montant, date):
+        try:
+            Pret.create(self, idMpiangona, idFiangonana, montant, date)
+        except pyodbc.Error as e:
+            print(f"Erreur lors de l'ajout du pret : {e}")
+
+
+    def get_date_obtention_pret(demande):
+        dateRakitraAnneeActuel = Fiangonana.check_date_exists(demande.date)  # date du dernier rakitra de l'annee actuel
+        dateRakitraAnneeAvant = Fiangonana.check_date_exists(Fiangonana.date_annee_precedente(demande.date))  # date du dernier rakitra de l'annee precedent
 
         sommeAnneeActuel = Fiangonana.get_sum_montants(dateRakitraAnneeActuel)
         sommeAnneePrecedent = Fiangonana.get_sum_montants(dateRakitraAnneeAvant)
 
+        pourcentage = Utilitaire.calculer_pourcentage_diminution(sommeAnneePrecedent, sommeAnneeActuel)
 
+        if(demande.montant <= Fiangonana.solde_actuel()):
+            # Fiangonana.ajouterPret(Fiangonana,demande.idMpino,demande.idFiangonana,demande.montant,demande.date)
+            return demande.date
+        # else:
+            # calculer solde estime = solde estime * estimation
+            # sauvegarder solde estime quelque part (par exemple base de donnee)
+            # si miexiste solde estime alors miverina ihn sy tsy miexiste alors solde estime = Fiangonana.solde_actuel()
+            # recuperer la date du dimanche suivant
+            # creer un nouveau demande
+            # reappeeler la fonction avec la nouvelle demande
+
+            # newDemande = Demande(Demande,demande.idMpino,demande.idMpino,demande.get_sum_montants())
+            # return Fiangonana.get_date_obtention_pret()
 
 # Exemple d'utilisation :
 # num = Fiangonana.login('admin','admin')
@@ -355,6 +429,6 @@ class Fiangonana:
 
 # Test de la fonction
 # Fiangonana.create_view_caisse(2024,2023)
-date_to_check = '2024-02-28'
-date_dimanche_annee_precedente = Fiangonana.date_annee_precedente(date_to_check)
-print(date_dimanche_annee_precedente)
+# date_to_check = '2024-02-28'
+# date_dimanche_annee_precedente = Fiangonana.date_annee_precedente(date_to_check)
+# print(date_dimanche_annee_precedente)
