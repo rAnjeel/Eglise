@@ -43,6 +43,7 @@ if __name__ == "__main__":
         elif login_result == 1:
             window.ShowHide(login, client)
 
+
     buttonLogin = login.pushButton
     login_result = buttonLogin.clicked.connect(handle_login())
     window.show()
