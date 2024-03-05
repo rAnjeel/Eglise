@@ -18,7 +18,7 @@ class TestFenetre(QMainWindow):
         self.formulairerakitraWindow.setupUi(self)
         self.clientWindow.setupUi(self)
 
-    def ShowHide(WindowX,WindowY):
+    def ShowHide(self, WindowX,WindowY):
         WindowX.show()
         WindowY.hide()
 
@@ -37,7 +37,10 @@ if __name__ == "__main__":
     client.setupUi(window)
 
     buttonLogin = login.pushButton
-    buttonLogin.clicked.connect(lambda: fiangonana.login(login.lineEdit.text(), login.lineEdit_2.text()))
-    buttonLogin.clicked.connect(window.ShowHide(login,formrakitra))
+    login_result = buttonLogin.clicked.connect(lambda: fiangonana.login(login.lineEdit.text(), login.lineEdit_2.text()))
+    if login_result == 0:
+        buttonLogin.clicked.connect(lambda: window.ShowHide(login,formrakitra))
+    elif login_result == 1:
+        buttonLogin.clicked.connect(lambda: window.ShowHide(login,client))
     window.show()
     app.exec_()
