@@ -36,11 +36,14 @@ if __name__ == "__main__":
     client = clientWindow()
 
 
+    def handle_login():
+        login_result = fiangonana.login(login.lineEdit.text(), login.lineEdit_2.text())
+        if login_result == 0:
+            window.ShowHide(login, formrakitra)
+        elif login_result == 1:
+            window.ShowHide(login, client)
+
     buttonLogin = login.pushButton
-    login_result = buttonLogin.clicked.connect(lambda: fiangonana.login(login.lineEdit.text(), login.lineEdit_2.text()))
-    if login_result == 0:
-        buttonLogin.clicked.connect(lambda: window.ShowHide(login,formrakitra))
-    elif login_result == 1:
-        buttonLogin.clicked.connect(lambda: window.ShowHide(login,client))
+    login_result = buttonLogin.clicked.connect(handle_login())
     window.show()
     app.exec_()
