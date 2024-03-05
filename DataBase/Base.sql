@@ -142,6 +142,13 @@ INSERT INTO caisse (idFiangonana, montant, dateInsertion) VALUES
 (1, 550000.00, '2022-12-18'),
 (1, 560000.00, '2022-12-25');
 
+INSERT INTO caisse (idFiangonana, montant, dateInsertion)
+VALUES
+    (1, 500000, '2024-01-07'),
+    (1, 750000, '2024-01-14'),
+    (1, 600000, '2024-01-21'),
+    (1, 850000, '2024-01-28'),
+    (1, 750000, '2024-02-11')
 
 --VIEW CREATION
 -- Supprimer l'ancienne vue si elle existe

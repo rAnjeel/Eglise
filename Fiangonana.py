@@ -202,6 +202,7 @@ class Fiangonana:
         finally:
             connection.close()
 
+    @staticmethod
     def get_dimanches_suivant(date_to_check):
         try:
             connection = SqlConnection()
@@ -229,6 +230,33 @@ class Fiangonana:
             print(f"Erreur lors de la récupération des dates des dimanches après la date spécifiée : {e}")
         finally:
             connection.close()
+
+    @staticmethod
+    def get_dimanche_precedent(date_to_check):
+        try:
+            connection = SqlConnection()
+            connection.connect()
+            cursor = connection.connection.cursor()
+
+            cursor.execute("""
+                SELECT TOP 1 Date
+                FROM Vue_Caisse
+                WHERE Date < ?
+                ORDER BY Date DESC;
+            """, (date_to_check,))
+
+            results = cursor.fetchall()
+
+            if results:
+                return results
+            else:
+                return None
+
+        except pyodbc.Error as e:
+            print(f"Erreur lors de la récupération des dates des dimanches après la date spécifiée : {e}")
+        finally:
+            connection.close()
+
 
     @staticmethod
     def get_numero_dimanche_caisse(date_to_check):
@@ -263,8 +291,55 @@ class Fiangonana:
             if connection:
                 connection.close()
 
+    #Fonction pour recuperer la derniere date du collecte Rakitra
+    def check_date_exists(date_to_check):
+        try:
+            connection = SqlConnection()
+            connection.connect()
+            cursor = connection.connection.cursor()
+
+            # Vérifier si la date existe dans la base de données
+            cursor.execute("SELECT Date FROM Vue_Caisse WHERE Date = ?", (date_to_check))
+            row = cursor.fetchone()
+
+            # Si la date n'est pas trouvée, vérifier le dimanche précédent
+            if row is None:
+                previous_sunday_date = Fiangonana.get_dimanche_precedent(date_to_check)
+                return Fiangonana.check_date_exists(previous_sunday_date[0])
+
+            return row[0] if row else None
+
+        except pyodbc.Error as e:
+            print(f"Erreur lors de la vérification de la date dans la base de données : {e}")
+            return False
+        finally:
+            if connection:
+                connection.close()
+
+    def date_annee_precedente(date_inserer_str):
+        # Convertir la date insérée en format string en objet datetime
+        date_inserer = datetime.datetime.strptime(date_inserer_str, '%Y-%m-%d').date()
+
+        # Extraire l'année de la date insérée
+        annee = date_inserer.year
+
+        # Soustraire une année à l'année
+        annee_precedente = annee - 1
+
+        # Créer une nouvelle date avec l'année précédente et les mêmes mois et jours
+        date_annee_precedente = datetime.date(annee_precedente, date_inserer.month, date_inserer.day)
+
+        # Convertir la date de l'année précédente en format string
+        date_annee_precedente_str = date_annee_precedente.strftime('%Y-%m-%d')
+
+        return date_annee_precedente_str
+
     def get_date_obtention_pret(date_to_check):
-        sommeActuel = Fiangonana.get_sum_montants(date_to_check)
+        dateRakitraAnneeActuel = Fiangonana.check_date_exists(date_to_check)  #date du dernier rakitra de l'annee actuel
+        dateRakitraAnneeAvant = Fiangonana.check_date_exists(Fiangonana.date_annee_precedente(date_to_check))
+
+        sommeAnneeActuel = Fiangonana.get_sum_montants(dateRakitraAnneeActuel)
+        sommeAnneePrecedent = Fiangonana.get_sum_montants(dateRakitraAnneeAvant)
 
 
 
@@ -279,6 +354,7 @@ class Fiangonana:
 #     print(Fiangonana.get_numero_dimanche_caisse(caisse[0])[0])
 
 # Test de la fonction
-date_to_check = '2023-08-06'
-date_dimanche_annee_precedente = Fiangonana.get_numero_dimanche_caisse(date_to_check)
+# Fiangonana.create_view_caisse(2024,2023)
+date_to_check = '2024-02-28'
+date_dimanche_annee_precedente = Fiangonana.date_annee_precedente(date_to_check)
 print(date_dimanche_annee_precedente)
