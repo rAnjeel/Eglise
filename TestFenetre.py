@@ -30,11 +30,11 @@ if __name__ == "__main__":
     fiangonana = Fiangonana(1, 11, 11, 11, 11)
 
     login = loginWindow()
-    login.setupUi(window)
+
     formrakitra = formulairerakitraWindow()
-    formrakitra.setupUi(window)
+
     client = clientWindow()
-    client.setupUi(window)
+
 
     buttonLogin = login.pushButton
     login_result = buttonLogin.clicked.connect(lambda: fiangonana.login(login.lineEdit.text(), login.lineEdit_2.text()))
