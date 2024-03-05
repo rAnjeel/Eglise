@@ -2,10 +2,8 @@ import pyodbc
 
 class SqlConnection:
     def __init__(self):
-        #self.server = 'DESKTOP-RCL8G7D\SQLEXPRESS'
+        self.server = 'DESKTOP-RCL8G7D\SQLEXPRESS'
         #self.server = '172.20.10.11'
-        self.server = '172.10.194.147'
-        self.server = '192.168.43.152'
         self.database = 'Eglise'
         self.username = 'sa'
         self.password = 'rabearison'

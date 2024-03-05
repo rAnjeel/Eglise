@@ -20,7 +20,7 @@ class Utilitaire:
 
 
 # Exemple d'utilisation
-somme_dons_2023 = 1203600
+somme_dons_2023 = 20000
 somme_dons_2024 = 15000
 pourcentage = Utilitaire.calculer_pourcentage_diminution(somme_dons_2023, somme_dons_2024)
 print(f"Pourcentage de diminution : {pourcentage}")
